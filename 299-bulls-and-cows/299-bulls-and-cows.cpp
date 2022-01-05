@@ -13,10 +13,7 @@ public:
             }
         }
         for(int i=0;i<guess.size();i++){
-            if(secret[i]==guess[i]) {
-                
-            }
-            else{
+            if(secret[i]!=guess[i]) {
                 int c=guess[i]-'0';
                 if(f[c]){
                     cbs++;
@@ -25,6 +22,5 @@ public:
             }
         }
         return to_string(equal)+"A"+to_string(cbs)+"B";
-        
     }
 };
