@@ -48,7 +48,7 @@ public:
             else{
                 TrieNode* nn=new TrieNode(ch);
                 temp->children[c]=nn;
-                nn->traversed=(val-sub);
+                nn->traversed=(val);
                 temp=nn;
             }
         }
@@ -66,10 +66,3 @@ public:
         return temp->traversed;
     }
 };
-
-/**
- * Your MapSum object will be instantiated and called as such:
- * MapSum* obj = new MapSum();
- * obj->insert(key,val);
- * int param_2 = obj->sum(prefix);
- */
