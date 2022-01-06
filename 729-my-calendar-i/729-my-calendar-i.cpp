@@ -31,14 +31,20 @@ bool check(Node* root,int st,int end){
 class MyCalendar {
 public:
     Node* root;
+ vector<pair<int,int>> v;
     
     MyCalendar() {
         root=NULL;
     }
     
     bool book(int st, int end) {
-        if(check(root,st,end-1)) return false;
-        root=insert(root,st,end-1);
+        end--;
+       
+        for(pair<int,int>& p: v){
+            int pst=p.first,pend=p.second;
+            if(!(pst>end or st>pend)) return false;
+        }
+        v.push_back({st,end});
         return true;
     }
 };
