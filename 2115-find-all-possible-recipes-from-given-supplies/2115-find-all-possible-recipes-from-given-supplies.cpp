@@ -20,14 +20,11 @@ public:
             q.pop();
             for(string& s: adj[fr]){
                 if(--indeg[s]==0){
-                    //this recipe is formed man
+                    //this recipe is formeded
+                    ans.push_back(s);
                     q.push(s);
                 }
             }
-        }
-       // vector<string> ans;
-        for(string& s: recipes) {
-            if(indeg[s]==0) ans.push_back(s);
         }
         return ans;
     }
