@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool poss(string& s,string& p,vector<bool>& rmv){
+    bool poss(string& s,string& p,bool rmv[]){
         int i=0,j=0;
         while(i<s.size() and j<p.size()){
             if(rmv[i]){
@@ -19,7 +19,8 @@ public:
         int st=0,end=removable.size();
         int ans;
         int n=s.size();
-         vector<bool> rmv(n,false); //rmv[i]= true, we are removing the  ith index..
+        bool rmv[n]; //rmv[i]= true, we are removing the  ith index..
+        memset(rmv,false,sizeof(rmv));
         while(st<=end){
             int mid=(st+end)/2;
             for(int i=0;i<mid;i++){
