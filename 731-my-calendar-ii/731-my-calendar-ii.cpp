@@ -6,6 +6,8 @@ public:
     }
     
     bool book(int start, int end) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         end--;
         m[start]++;
         m[end+1]--;
