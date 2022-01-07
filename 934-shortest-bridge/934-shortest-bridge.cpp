@@ -18,6 +18,8 @@ public:
         }
     }
     int shortestBridge(vector<vector<int>>& grid) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         int r=grid.size(),c=grid[0].size();
         bool go=true;
         vis=vector<vector<bool>>(r,vector<bool>(c,false));
