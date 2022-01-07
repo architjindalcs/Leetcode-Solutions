@@ -12,17 +12,12 @@ public:
             while(siz--){
                 int fr=q.front();
                 q.pop();
-                if(fr==goal) {
-                    cout<<"hiii"<<endl;
+                if(fr==goal)
                     return level;
-                }
                 for(int i: nums){
                     if(fr+i>1000 or fr+i<0){
-                        if(fr+i==goal) {
-                            cout<<"fr1: "<<fr<<endl;
-                            cout<<"i: "<<i<<endl; 
+                        if(fr+i==goal)
                             return level+1;
-                        }
                     }
                     else if(fr+i>=0 and fr+i<=1000){
                         if(!vis[fr+i]){
@@ -32,11 +27,8 @@ public:
                     }
                     
                     if(fr-i>1000 or fr-i<0){
-                        if(fr-i==goal) {
-                            cout<<"fr2: "<<fr<<endl;
-                            cout<<"i: "<<i<<endl; 
+                        if(fr-i==goal) 
                             return level+1;
-                        }
                     }
                     else if(fr-i>=0 and fr-i<=1000){
                         if(!vis[fr-i]){
@@ -47,11 +39,8 @@ public:
                     
                     
                     if((fr^i)>1000 or (fr^i)<0){
-                        if((fr^i)==goal) {
-                            cout<<"fr3: "<<fr<<endl;
-                            cout<<"i: "<<i<<endl; 
+                        if((fr^i)==goal) 
                             return level+1;
-                        }
                     }
                     else if((fr^i)>=0 and (fr^i)<=1000){
                         if(!vis[fr^i]){
