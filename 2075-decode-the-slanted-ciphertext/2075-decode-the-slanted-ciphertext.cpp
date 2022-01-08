@@ -14,16 +14,13 @@ public:
             }
         }
         int i=0;
-        s=ans;
-        int len=s.size();
-
-//        s=s.substr(i);
-        i=s.size()-1;
-        while(i>=0 and s[i]==' '){
+        int len=ans.size();
+        i=ans.size()-1;
+        while(i>=0 and ans[i]==' '){
             i--;
             len--;
         }
-        return s.substr(0,len);
+        return ans.substr(0,len);
      
     }
 };
