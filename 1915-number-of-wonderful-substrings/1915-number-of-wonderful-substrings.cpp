@@ -17,7 +17,7 @@ public:
             ans+=(m[mask]);
             
             //  00100000010
-            for(char ch='a';ch<='z';ch++){
+            for(char ch='a';ch<='j';ch++){
                 ans+=m[mask^(1<<(ch-'a'))];
             }
             m[mask]++;
