@@ -16,7 +16,8 @@ public:
             mask=mask ^ (1<<(word[i]-'a'));  
             ans+=(m[mask]);
             
-            for(char ch='a';ch<='j';ch++){
+            //  00100000010
+            for(char ch='a';ch<='z';ch++){
                 ans+=m[mask^(1<<(ch-'a'))];
             }
             m[mask]++;
