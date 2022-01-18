@@ -33,7 +33,7 @@ public:
                 }
                 j++;
             }
-            for(auto x: cpy){
+            for(auto& x: cpy){
                 if(x.second!=f[x.first]){
                     poss=false;
                     break;
