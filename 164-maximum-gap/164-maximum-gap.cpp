@@ -6,19 +6,18 @@ public:
             maxm=max(maxm,i);
             minm=min(minm,i);
         }
-        if(maxm==minm) return 0;
         int n=nums.size();
-        int bucketSize=(maxm-minm)%(n-1)==0? (maxm-minm)/(n-1): (maxm-minm)/(n-1)+1;
-      //  n=bucketSize;
+        if(maxm==minm) return 0;
+        int bucketSize=(maxm-minm)%(n-1)==0? (maxm-minm)/(n-1) : (maxm-minm)/(n-1)+1;
+        
         vector<int> maxArr(n,INT_MIN);
         vector<int> minArr(n,INT_MAX);
-
         for(int ele: nums){
-            int idx=(ele-minm)/bucketSize;
+            int idx=(ele-minm)/(bucketSize);
             maxArr[idx]=max(maxArr[idx],ele);
             minArr[idx]=min(minArr[idx],ele);
         }
-       // return -1;
+        
         int prev=INT_MIN;
         int maxGap=INT_MIN;
         for(int i=0;i<n;i++){
