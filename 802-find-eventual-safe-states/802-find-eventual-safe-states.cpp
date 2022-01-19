@@ -4,7 +4,14 @@ public:
     bool dfs(vector<vector<int>>& adj,int src){
         color[src]=2; //marked initially as unsafe..
         for(int i: adj[src]){
-            if(color[i]==2) return false; //bychance, we get here..it will lead to 
+            if(color[i]==2) return false; //bychance, we get here..it will lead to cycle, so 
+            //unsafe... 
+            /*
+                1--->2--->3
+                ^
+                |_ _ _ _ _|
+                in above case, 1 is eventually unsafe node..
+            */
             if(color[i]==0){
                 if(!dfs(adj,i)){
                     return false;  //it is unsafe node...
