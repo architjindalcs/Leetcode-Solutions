@@ -1,5 +1,5 @@
 # Search Pattern (KMP-Algorithm)
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given two strings, one is a text string,&nbsp;<strong>txt</strong> and other is a pattern string, <strong>pat</strong>. The task is to print the indexes of all the occurences of pattern&nbsp;string in the text string. For printing, Starting Index of a string should be taken as&nbsp;1.</span></p>
 
