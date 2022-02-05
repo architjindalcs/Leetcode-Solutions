@@ -1,27 +1,26 @@
 class Solution {
 public:
-    int lcs(string& s1,string& s2){
-        int n1=s1.size(),n2=s2.size();
-        int dp[n1+1][n2+1];
+    int lcs(string& s){
+        int n=s.size();
+        int dp[n][n];
         memset(dp,0,sizeof(dp));
-        for(int i=1;i<=n1;i++){
-            for(int j=1;j<=n2;j++){
-                if(s1[i-1]==s2[j-1]) 
-                dp[i][j]=1+dp[i-1][j-1];
-                else 
-                dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+        for(int i=0;i<n;i++) dp[i][i]=1;
+        for(int l=2;l<=n;l++){
+            for(int i=0;i<=(n-l);i++){
+                int k=i+l-1;
+                dp[i][k]=(l==2? (1+(s[i]==s[k])) : (s[i]==s[k]? 2+ dp[i+1][k-1] : max(dp[i+1][k],dp[i][k-1])) );
             }
         }
-        return dp[n1][n2];
+        return dp[0][n-1];
     }
     int minInsertions(string s) {
         /*
-            mbadm  -> rev -> mdabm
-            
-            mam 
+            [a]krac[b]cark[a]  -> done..
+            [a]ka[b]cr[a]
         */
-        string s2=s;
-        reverse(s2.begin(),s2.end());
-        return s.size()-lcs(s,s2);
+        
+  //      string s2=s;
+//        reverse(s2.begin(),s2.end());
+        return s.size()-lcs(s);
     }
 };
