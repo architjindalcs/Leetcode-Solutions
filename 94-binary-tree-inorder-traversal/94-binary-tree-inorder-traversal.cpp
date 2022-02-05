@@ -11,21 +11,21 @@
  */
 class Solution {
 public:
-    TreeNode* findPredecessor(TreeNode* root){
+    TreeNode* findPred(TreeNode* root){
         TreeNode* temp=root->left;
         while(temp->right and temp->right!=root) temp=temp->right;
         return temp;
     }
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> ans;
         TreeNode* curr=root;
+        vector<int> ans;
         while(curr){
             if(!(curr->left)){
                 ans.push_back(curr->val);
                 curr=curr->right;
             }
             else{
-                TreeNode* pred=findPredecessor(curr);
+                TreeNode* pred=findPred(curr);
                 if(!(pred->right)){
                     pred->right=curr;
                     curr=curr->left;
