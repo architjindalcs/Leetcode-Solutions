@@ -10,15 +10,15 @@ public:
         if(maxH.empty() or num<maxH.top()) maxH.push(num);
         else minH.push(num);
         
-        
-        if(((int)minH.size()-(int)maxH.size())>1){
+        if(((int)maxH.size()-(int)minH.size())>1) {
+            minH.push(maxH.top());
+            maxH.pop();
+        }
+         
+        else  if(((int)minH.size()-(int)maxH.size())>1){
             //minH me jyada elements aa gye bhot..
             maxH.push(minH.top());
             minH.pop();
-        }
-        else if(((int)maxH.size()-(int)minH.size())>1) {
-            minH.push(maxH.top());
-            maxH.pop();
         }
         
     }
