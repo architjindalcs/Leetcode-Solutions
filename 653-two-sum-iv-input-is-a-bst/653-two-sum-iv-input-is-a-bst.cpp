@@ -11,22 +11,14 @@
  */
 class Solution {
 public:
-    vector<int> ans;
-    void helper(TreeNode* root){
-        if(!root) return;
-        helper(root->left);
-        ans.push_back(root->val);
-        helper(root->right);
-    }
+    unordered_set<int> st;
     bool findTarget(TreeNode* root, int k) {
-        helper(root);
-        int l=0,r=ans.size()-1;
-        while(l<r){
-            int sum=ans[l]+ans[r];
-            if(sum==k) return true;
-            else if(sum<k) l++;
-            else r--;
-        }
-        return false;
+        if(!root) return false;
+        bool lans=findTarget(root->left,k);
+        if(lans) return true;
+        if(st.count(k-root->val)) return true;
+        st.insert(root->val);
+        bool rans=findTarget(root->right,k);
+        return rans;
     }
 };
