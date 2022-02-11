@@ -20,8 +20,8 @@ class Solution {
         // Code here
         vector<bool> vis(V,false);
         for(int i=0;i<V;i++){
-            if(!vis[i] and adj[i].size()){
-                if(cycle(adj,i,vis,-1)) return true;
+            if(!vis[i]){
+                if(cycle(adj,i,vis)) return true;
             }
         }
         return false;
