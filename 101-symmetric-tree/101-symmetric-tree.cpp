@@ -17,7 +17,24 @@ public:
         return r1->val==r2->val and helper(r1->left,r2->right) and helper(r1->right,r2->left);
     }
     bool isSymmetric(TreeNode* root) {
-        if(!root) return true;
-        return helper(root->left,root->right);
+        queue<TreeNode*> q;
+        q.push(root->left);
+        q.push(root->right);
+        while(q.size()>=2){
+            TreeNode* lft=q.front();
+            q.pop();
+            TreeNode* rht=q.front();
+            q.pop();
+            if(lft and rht and lft->val!=rht->val) return false;
+            if(lft==NULL and rht==NULL) continue;
+            if(!lft or !rht) return false;
+            if(lft and rht){
+                q.push(lft->left);
+                q.push(rht->right);
+                q.push(lft->right);
+                q.push(rht->left);
+            }
+        }
+        return true;
     }
 };
