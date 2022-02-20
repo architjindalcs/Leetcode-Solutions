@@ -12,8 +12,7 @@ public:
             i+=2;
         }
         //2,4,6,16  -> 20 28-20 = 8 -> 
-        int sz=ans.size();
-        ans[sz-1]+=(finalSum-cs);
+        ans.back()+=(finalSum-cs);
         return ans;
     }
 };
