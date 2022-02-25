@@ -17,6 +17,7 @@ public:
         ListNode* temp=t;
         while(temp!=NULL){
             if(temp->next==NULL){
+                t->next=NULL;
                 return dummy->next;
             }
             else{
@@ -33,11 +34,9 @@ public:
                     }
                     else{
                         temp=temp->next;
-                        while(temp && temp->val==n){
+                        while(temp->next && temp->next->val == n){
                             temp=temp->next;
                         }
-                        t->next=temp;
-                        temp=t;
                     }
                 }
             }
