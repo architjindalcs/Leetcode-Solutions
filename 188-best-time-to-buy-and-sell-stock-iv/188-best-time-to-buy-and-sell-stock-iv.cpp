@@ -7,12 +7,13 @@ public:
         memset(dp,0,sizeof(dp));
         //case of zero transactions and case of n=0 (single element case), profit will surely be zero
         for(int kval=1;kval<=k;kval++){
-            for(int j=1;j<n;j++){
-                int maxPro=dp[kval][j-1];
-                for(int z=j-1;z>=0;z--){
-                    maxPro=max(maxPro,prices[j]-prices[z]+dp[kval-1][z]);
-                }
-                dp[kval][j]=maxPro;
+            int maxm=-prices[0];
+            for(int i=1;i<n;i++){
+                //int maxPro=dp[kval][j-1]; //I dont choose to transact on the current day..
+                int dontChose=dp[kval][i-1];
+                int currChose=prices[i]+maxm;
+                dp[kval][i]=max(currChose,dontChose);
+                maxm=max(maxm,-prices[i]+dp[kval-1][i]);
             }
         }
         return dp[k][n-1];
