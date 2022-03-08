@@ -6,37 +6,23 @@ using namespace std;
 class Solution {
   public:
     // Function to count paths between two vertices in a directed graph.
+    vector<int> dp;
+    int helper(vector<int> adj[],int src,int dest){
+        if(src==dest) return 1;
+        int cnt=0;
+        for(int i: adj[src]){
+            if(dp[i]==-1)
+            cnt+=helper(adj,i,dest);
+            else cnt+=dp[i];
+        }
+        dp[src]=cnt;
+        return cnt;
+    }
     int countPaths(int V, vector<int> adj[], int source, int destination) {
         // Code here
-	    vector<int> ts;
-	   
-	    vector<int> indeg(V,0);
-	    for(int i=0;i<V;i++){
-	        for(int j: adj[i]) indeg[j]++; 
-	    }
-	    queue<int> q;
-	    for(int i=0;i<V;i++){
-	        if(indeg[i]==0) q.push(i);
-	    }
-	    while(q.size()){
-	        int fr=q.front();
-	        q.pop();
-	        ts.push_back(fr);
-	        for(int j: adj[fr]){
-	            if(--indeg[j]==0) q.push(j);
-	        }
-	    }
-	    
-	    int dp[V];
-	    memset(dp,0,sizeof(dp));
-        dp[destination]=1;
-
-       for(int i=ts.size()-1;i>=0;i--){
-	        for(int j: adj[ts[i]]){
-	            dp[ts[i]]+=dp[j];
-	        }
-	    }
-	    return dp[source];
+        dp=vector<int> (V,-1);  //-1 represents no path from current vertex to destination..
+        
+        return helper(adj,source,destination);
     }
 };
 
