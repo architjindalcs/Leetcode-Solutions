@@ -19,6 +19,7 @@ public:
                 }
             }
             if(temp.size()){
+                //it means, the element with maxm freq is present till now, then ans+=(n+1)
                 for(int i: temp) pq.push(i);
                 ans+=(n+1);
             }
