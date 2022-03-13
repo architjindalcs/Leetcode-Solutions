@@ -11,22 +11,20 @@ class Solution{
     int minJumps(int arr[], int n){
         // Your code here
         if(n==1) return 0;
-        if(n>1 and !arr[0]) return -1;
-        int stair=arr[0],ladder=arr[0];
-        int jmps=1;
+        if(arr[0]==0) return -1;
+        int maxReach=arr[0],jumps=1;
+        int stair=arr[0];
         for(int i=1;i<n;i++){
-            if(i==n-1){
-                return jmps;
-            }
-            ladder=max(ladder,i+arr[i]);
+            maxReach=max(maxReach,i+arr[i]);
+            if(i==n-1) return jumps;
             stair--;
-            if(stair==0){
-                jmps++;
-                stair=ladder-i;
+            if(!stair){
+                stair=maxReach-i;
+                jumps++;
                 if(stair<=0) return -1;
             }
         }
-        return -1;
+        return jumps;
     }
 };
 
