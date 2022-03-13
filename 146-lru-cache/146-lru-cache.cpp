@@ -10,59 +10,63 @@ class Node{
         prev=next=NULL;
     }
 };
+
 class LRUCache {
 public:
-    //keep the most recently used as the head's next..
     int cap;
     Node* head;
     Node* tail;
-    unordered_map<int,Node*> keyAddr;   //maintains key and correspoding address
+    unordered_map<int,Node*> keyAddr;
     LRUCache(int capacity) {
+        cap=capacity;
         head=new Node(-1,-1);
         tail=new Node(-1,-1);
-        head->next=tail; tail->prev=head;
-        cap=capacity;
+        head->next=tail;
+        tail->prev=head;
     }
     void insertNode(Node* node){
-        //it would insert a node..just after head..
+        //insert a node just after the head..least recently used node..
         Node* headNext=head->next;
-        node->next=headNext;
-        headNext->prev=node;
         head->next=node;
         node->prev=head;
+        node->next=headNext;
+        headNext->prev=node;
     }
-    void deleteNode(Node* node){
-        //it would delete a node..
-        Node* myPrev=node->prev;
-        Node* myNext=node->next;
-        myPrev->next=myNext;
-        myNext->prev=myPrev;  //ayy, i am gone now..
+    void removeNode(Node* node){
+        Node* nodeNext=node->next;
+        Node* nodePrev=node->prev;
+        nodePrev->next=nodeNext;
+        nodeNext->prev=nodePrev;
     }
     int get(int key) {
-        if(keyAddr.count(key)){
-            int val=keyAddr[key]->val;
-            Node* keyNode=keyAddr[key];
-            deleteNode(keyNode);  //deleting the node..
-            insertNode(keyNode);  //making it head's next  (Most recently used..);
-            return val;
-        }
-        return -1;
+        if(!keyAddr.count(key)) return -1;
+        int val=keyAddr[key]->val;
+        removeNode(keyAddr[key]);
+        insertNode(keyAddr[key]);  //now this is most recently used..
+        return val;
     }
     
     void put(int key, int value) {
         if(keyAddr.count(key)){
-            keyAddr[key]->val=value;  //updated the value..
-            deleteNode(keyAddr[key]);
+            //it was already present, good
+            keyAddr[key]->val=value;
+            removeNode(keyAddr[key]);
             insertNode(keyAddr[key]);
             return;
         }
         if(keyAddr.size()==cap){
-            //now, we need to evict..
             keyAddr.erase(tail->prev->key);
-            deleteNode(tail->prev);
+            removeNode(tail->prev);
         }
         Node* nn=new Node(key,value);
-        insertNode(nn);
         keyAddr[key]=nn;
+        insertNode(nn);
     }
 };
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
