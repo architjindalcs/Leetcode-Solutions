@@ -38,7 +38,7 @@ class Solution
     Node* pairWiseSwap(struct Node* head) 
     {
         if(!(head) or !(head->next)) return head;
-        Node* ans=NULL;
+        Node* ans;
         Node* prev=NULL;
         Node* curr=head;
         while(curr and curr->next){
