@@ -22,10 +22,10 @@ class Solution{
             return 1;
         }
         long long ans=0;
-        ans+=(toh(N-1,from,aux,to));
+        ans+=2*(toh(N-1,from,aux,to));
         cout<<"move disk "<<N<<" from rod "<<from<<" to rod "<<to<<endl;
         ans++;
-        ans+=(toh(N-1,aux,to,from));
+        (toh(N-1,aux,to,from));
         return ans;
     }
 
