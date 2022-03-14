@@ -23,7 +23,8 @@ class Solution{
     {
         if(n<=1) return n;
         int x=nearestPower2SetBitPos(n);
-        return (x * pow(2, (x - 1))) + (n - pow(2, x) + 1) + countSetBits(n - pow(2, x));
+       //  return (x * pow(2, (x - 1))) + (n - pow(2, x) + 1) + countSetBits(n - pow(2, x));
+        return x*pow(2,x-1)+(1+n-pow(2,x))+countSetBits(n-pow(2,x));
         // Your logic here
     }
 };
