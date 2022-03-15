@@ -15,7 +15,7 @@ class Solution
 	    for(int i=idx;i<s.size();i++){
 	        swap(s[i],s[idx]);
 	        permute(s,idx+1);
-	        swap(s[i],s[idx]);
+	    //    swap(s[i],s[idx]);
 	    }
 	}
 	vector<string>find_permutation(string S)
