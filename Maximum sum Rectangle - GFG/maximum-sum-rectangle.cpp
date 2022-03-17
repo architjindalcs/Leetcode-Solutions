@@ -12,19 +12,23 @@ class Solution {
     int maximumSumRectangle(int r, int c, vector<vector<int>>& grid) {
         // code here
         int ans=INT_MIN;
-        
-        for(int i=0;i<r;i++){
-            vector<int> arr(c,0);
-            for(int j=i;j<r;j++){
-                for(int col=0;col<c;col++)
-                arr[col]+=grid[j][col];
-                
+        for(int col=1;col<c;col++){
+            for(int row=0;row<r;row++)
+            grid[row][col]+=grid[row][col-1];
+        }
+
+        for(int stcol=0;stcol<c;stcol++){
+           
+            for(int endcol=stcol;endcol<c;endcol++){
                 int cs=0;
-                for(int k=0;k<arr.size();k++){
-                    cs=max(cs+arr[k],arr[k]);
+                for(int i=0;i<r;i++){
+                    int ele=grid[i][endcol]-(stcol? grid[i][stcol-1]: 0);
+                  //  cout<<"ele:  "<<ele<<endl;
+                    cs=max(cs+ele,ele);
+                    
                     ans=max(ans,cs);
+                    }
                 }
-                
             }
         }
         return ans;
