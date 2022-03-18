@@ -100,7 +100,7 @@ struct Node
 */
 Node* reverseDLL(Node * head)
 {
-        if(!head or !(head->next)) return head; //case of single node
+    if(!head or !(head->next)) return head;
     Node* temp=NULL;
     Node* curr=head;
     while(curr){
@@ -110,6 +110,7 @@ Node* reverseDLL(Node * head)
         curr=curr->prev;
     }
     return temp->prev;
+
 }
 
 
