@@ -65,6 +65,17 @@ void StackQueue :: push(int x)
 //Function to pop an element from queue by using 2 stacks.
 int StackQueue :: pop()
 {
+    if(s2.empty()){
+        while(s1.size()){
+            s2.push(s1.top());
+            s1.pop();
+        }
+    }
+    if(s2.empty()) return -1;
+    int tp=s2.top();
+    s2.pop();
+    return tp;
+    
     if(s1.empty()) return -1;
     while(s1.size()>1) {
         s2.push(s1.top());
