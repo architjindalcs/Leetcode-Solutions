@@ -34,8 +34,7 @@ class Solution
     void buildHeap(int arr[], int n)  
     { 
     // Your Code Here
-        for(int i=n/2-1;i>=0;i--)
-        heapify(arr,n,i);
+        for(int i=n/2-1;i>=0;i--) heapify(arr,n,i);
     }
 
     
@@ -45,7 +44,7 @@ class Solution
     {
         buildHeap(arr,n);
         for(int i=n-1;i>=1;i--){
-            swap(arr[i],arr[0]);
+            swap(arr[0],arr[i]);
             heapify(arr,i,0);
         }
         //code here
