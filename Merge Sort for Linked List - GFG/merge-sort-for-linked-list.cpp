@@ -43,13 +43,13 @@ class Solution{
         //1,2,[3],4,5 -> 1,2,[3],4
         /*
         1,2,3,4
-        s s s
-        f   f   f
-          f   f
-          
-          1,2,3
-          s s
-              f
+        s p s
+        f      f
+        
+        1,2,3,4,5
+        s s  
+        f   f   f   
+            s
         */
         Node* s=head;
         Node* f=head;
