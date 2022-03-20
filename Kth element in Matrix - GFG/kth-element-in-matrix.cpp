@@ -38,17 +38,32 @@ int helper(int grid[MAX][MAX], int n,int mid){
     }
     return cnt;
 }
-int kthSmallest(int mat[MAX][MAX], int n, int k)
+int kthSmallest(int grid[MAX][MAX], int n, int k)
 {
-    int st=mat[0][0],end=mat[n-1][n-1];
-    while(st<end){
-        int mid=(st+end)/2;
-        int cnt=helper(mat,n,mid);
-        if(cnt>=k){
-            end=mid;
-        }
-        else st=mid+1;
+    vector<int> nI(n,1);
+    
+    int cnt=0;
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+    
+    for(int i=0;i<n;i++){
+        pq.push({grid[i][0],i});
     }
-    return st;
+    
+    while(pq.size()){
+        pair<int,int> tp=pq.top();
+        pq.pop();
+        int ele=tp.first,listNo=tp.second;
+        cnt++;
+        if(cnt==k) return ele;
+        
+        int nidx=nI[listNo];
+        
+        if(nidx<n){
+            pq.push({grid[listNo][nidx],listNo});
+            nI[listNo]++;
+        }
+    }
+    
+    return -1;
   //Your code here
 }
