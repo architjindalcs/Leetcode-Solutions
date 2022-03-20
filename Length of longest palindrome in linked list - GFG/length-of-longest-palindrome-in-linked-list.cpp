@@ -79,13 +79,13 @@ struct Node
 /*The function below returns an int denoting
 the length of the longest palindrome list. */
 int maxL(Node* n1,Node* n2){
-    int cnt=0;
+    int len=0;
     while(n1 and n2 and n1->data==n2->data){
-        cnt++;
+        len++;
         n1=n1->next;
         n2=n2->next;
     }
-    return cnt;
+    return len;
 }
 int maxPalindrome(Node *head)
 {
