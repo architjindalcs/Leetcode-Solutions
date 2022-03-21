@@ -19,10 +19,10 @@ public:
             if(cnt1 > 0 && cnt2 > 0)
                 res += cnt1*cnt2;
             
-            int d3 = distance(lset.lower_bound(nums[i]), lset.end());  //left be bde..
-            int d4 = distance(rset.begin(), rset.find(nums[i])); //right me chote..
-            if(d3 > 0 && d4 > 0)
-                res += d3*d4; 
+            int cnt3 = distance(lset.upper_bound(nums[i]), lset.end());  //left be bde..
+            int cnt4 = distance(rset.begin(), rset.find(nums[i])); //right me chote..
+            if(cnt3 > 0 && cnt4 > 0)
+                res += cnt3*cnt4; 
         }
         return res;
     }
