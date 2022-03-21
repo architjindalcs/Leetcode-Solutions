@@ -14,8 +14,8 @@ public:
             if(d1 > 0 && d2 > 0)
                 res += d1*d2;
             
-            int d3 = std::distance(lset.upper_bound(nums[i]), lset.end()); 
-            int d4 = std::distance(rset.begin(), rset.lower_bound(nums[i])); 
+            int d3 = distance(lset.upper_bound(nums[i]), lset.end()); 
+            int d4 = distance(rset.begin(), rset.lower_bound(nums[i])); 
             if(d3 > 0 && d4 > 0)
                 res += d3*d4; 
         }
