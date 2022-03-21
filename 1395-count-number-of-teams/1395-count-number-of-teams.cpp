@@ -15,7 +15,7 @@ public:
                 res += d1*d2;
             
             int d3 = distance(lset.upper_bound(nums[i]), lset.end()); 
-            int d4 = distance(rset.begin(), rset.lower_bound(nums[i])); 
+            int d4 = distance(rset.begin(), rset.find(nums[i])); 
             if(d3 > 0 && d4 > 0)
                 res += d3*d4; 
         }
