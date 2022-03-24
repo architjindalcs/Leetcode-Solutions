@@ -24,13 +24,13 @@ public:
                          i
                 */
                 double cs=0;
-                double maxm=0.0; //i am not making a cur
+                double maxm=dp[i][cuts-1]; //i am not making a cur
                 for(int j=i;j>=0;j--){
                     cs+=nums[j];
                     double val=(j ? dp[j-1][cuts-1]: 0)+ (cs/(1.0*(i-j+1)) );
                     maxm=max(maxm,val);
                 }
-                maxm=max(maxm,(cs/(1.0*(i+1))));
+                //maxm=max(maxm,(cs/(1.0*(i+1))));
                // cout<<"maxm: "<<maxm<<endl;
                 dp[i][cuts]=maxm;
             }
