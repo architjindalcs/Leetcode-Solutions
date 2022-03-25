@@ -6,39 +6,43 @@ using namespace std;
 class Solution
 {
     public:
-    bool hamPath(vector<vector<bool>>& adj,vector<bool>& used, vector<int>& path, int V){
-        if(path.size()==V) return true;
+    int V;
+    bool hamPath(vector<vector<bool>>& adj,vector<bool>& vis,vector<int>& path){
+        if(path.size()==adj.size()){
+            //covered all vertices..hamiltonian path case..
+            return true;
+        }
         
-        for(int i=0;i<V;i++){
-            if(!used[i] and adj[path.back()][i]){
-                used[i]=true;
+        for(int i=0;i<adj.size();i++){
+            if(!vis[i] and adj[path.back()][i]){
+                vis[i]=true;
                 path.push_back(i);
-                if(hamPath(adj,used,path,V)) return true;
+                if(hamPath(adj,vis,path)) return true;
                 path.pop_back();
-                used[i]=false;
+                vis[i]=false;
             }
         }
         return false;
+        
     }
     bool check(int N,int M,vector<vector<int>> Edges)
     {
-        vector<vector<bool>> adj(N,vector<bool> (N,false));
-        for(vector<int>& e: Edges){
+        vector<vector<bool>> adj(N,vector<bool>(N,false));
+        for(auto& e: Edges){
             int st=e[0],end=e[1];
             st--; end--;
             adj[st][end]=true;
             adj[end][st]=true;
         }
-        
         for(int i=0;i<N;i++){
-            vector<bool> vis(N,false);
             vector<int> path;
             path.push_back(i);
+            vector<bool> vis(N,false);
             vis[i]=true;
-            if(hamPath(adj,vis,path,N)) return true;
+            if(hamPath(adj,vis,path)) return true;
         }
-        // code here
         return false;
+        // code here
     }
 };
  
