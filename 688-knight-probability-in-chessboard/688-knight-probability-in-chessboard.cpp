@@ -12,7 +12,7 @@ public:
                     for(int k=0;k<8;k++){
                         int newx=i+row[k],newy=j+col[k];
                         if(newx>=0 and newx<n and newy>=0 and newy<n){
-                            dp[mov][i][j]+=(dp[mov-1][newx][newy]);
+                            dp[mov][newx][newy]+=(dp[mov-1][i][j]);
                         }
                     }
                 }
