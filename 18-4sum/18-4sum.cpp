@@ -20,7 +20,7 @@ public:
         }
         
         vector<vector<int>> ans;
-        for(int i=idx;i<nums.size()-k+1;i++){
+        for(int i=idx;i<nums.size();i++){
             if(i>idx and nums[i]==nums[i-1]) continue;
             vector<vector<int>> nans=ksum(nums,i+1,target-nums[i],k-1);
             for(vector<int>& v: nans){
