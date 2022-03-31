@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool mymatch(string s,string p){
+    bool isMatch(string s, string p) {
         int n1=s.size(),n2=p.size();
         bool dp[n1+1][n2+1];
         memset(dp,false,sizeof(dp));
@@ -25,9 +25,5 @@ public:
             }
         }
         return dp[n1][n2];
-    }
-    bool isMatch(string s, string p) {
-        return mymatch(s,p);
-      //  return false;
     }
 };
