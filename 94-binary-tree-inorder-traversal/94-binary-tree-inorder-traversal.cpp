@@ -11,31 +11,18 @@
  */
 class Solution {
 public:
-    TreeNode* findPred(TreeNode* root){
-        TreeNode* temp=root->left;
-        while(temp->right and temp->right!=root) temp=temp->right;
-        return temp;
-    }
     vector<int> inorderTraversal(TreeNode* root) {
         TreeNode* curr=root;
+        stack<TreeNode*> st;
         vector<int> ans;
-        while(curr){
-            if(!(curr->left)){
-                ans.push_back(curr->val);
-                curr=curr->right;
+        while(curr or st.size()){
+            while(curr){
+                st.push(curr);
+                curr=curr->left;
             }
-            else{
-                TreeNode* pred=findPred(curr);
-                if(!(pred->right)){
-                    pred->right=curr;
-                    curr=curr->left;
-                }
-                else{
-                    pred->right=NULL;
-                    ans.push_back(curr->val);
-                    curr=curr->right;
-                }
-            }
+            TreeNode* tp=st.top(); st.pop();
+            ans.push_back(tp->val);
+            curr=tp->right;
         }
         return ans;
     }
