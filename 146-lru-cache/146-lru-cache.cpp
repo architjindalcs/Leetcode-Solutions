@@ -1,16 +1,14 @@
 class Node{
     public:
-    int key;
-    int val;
+    int key,value;
     Node* next;
     Node* prev;
-    Node(int key,int val){
+    Node(int key,int value){
         this->key=key;
-        this->val=val;
-        prev=next=NULL;
+        this->value=value;
+        next=prev=NULL;
     }
 };
-
 class LRUCache {
 public:
     int cap;
@@ -24,43 +22,44 @@ public:
         head->next=tail;
         tail->prev=head;
     }
-    void insertNode(Node* node){
-        //insert a node just after the head..least recently used node..
+    void insert(Node* node){
+        //insert a node just after head.
         Node* headNext=head->next;
         head->next=node;
         node->prev=head;
         node->next=headNext;
         headNext->prev=node;
     }
-    void removeNode(Node* node){
-        Node* nodeNext=node->next;
-        Node* nodePrev=node->prev;
-        nodePrev->next=nodeNext;
-        nodeNext->prev=nodePrev;
+    void remove(Node* node){
+        Node* pptr=node->prev;
+        Node* nptr=node->next;
+        pptr->next=nptr;
+        nptr->prev=pptr;
     }
     int get(int key) {
         if(!keyAddr.count(key)) return -1;
-        int val=keyAddr[key]->val;
-        removeNode(keyAddr[key]);
-        insertNode(keyAddr[key]);  //now this is most recently used..
-        return val;
+        Node* addr=keyAddr[key];
+        remove(addr);
+        insert(addr);
+        return addr->value;
     }
+    
     
     void put(int key, int value) {
         if(keyAddr.count(key)){
-            //it was already present, good
-            keyAddr[key]->val=value;
-            removeNode(keyAddr[key]);
-            insertNode(keyAddr[key]);
+            keyAddr[key]->value=value;
+            remove(keyAddr[key]);
+            insert(keyAddr[key]);
             return;
-        }
+        }    
         if(keyAddr.size()==cap){
             keyAddr.erase(tail->prev->key);
-            removeNode(tail->prev);
+            remove(tail->prev);
         }
         Node* nn=new Node(key,value);
         keyAddr[key]=nn;
-        insertNode(nn);
+        insert(nn);
+        
     }
 };
 
