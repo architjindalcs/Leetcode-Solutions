@@ -13,9 +13,10 @@ class Solution {
 public:
     TreeNode* prev=NULL;
     void helper(TreeNode* root){
-        if(!root) return;
+       if(!root) return;
         TreeNode* l=root->left;
         TreeNode* r=root->right;
+        
         if(!prev){
             prev=root;
         }
@@ -24,10 +25,12 @@ public:
             prev->left=NULL;
             prev=root;
         }
+        
         helper(l);
         helper(r);
     }
     void flatten(TreeNode* root) {
         helper(root);
+
     }
 };
