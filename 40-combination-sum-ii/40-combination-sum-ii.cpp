@@ -1,12 +1,8 @@
 class Solution {
 public:
-        vector<vector<int>> ans;
-    
+    vector<vector<int>> ans;
     void helper(vector<int>& nums,int idx,int cs,int target,vector<int>& path){
         if(target==cs) ans.push_back(path);
-        if(idx==nums.size()){
-            return;
-        }
         
         for(int i=idx;i<nums.size();i++){
             if(i>idx and nums[i]==nums[i-1]) continue;
@@ -18,7 +14,7 @@ public:
         }
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-               vector<int> path;
+        vector<int> path;
         sort(candidates.begin(),candidates.end());
         helper(candidates,0,0,target,path);
         return ans;
