@@ -12,13 +12,19 @@ public:
     int characterReplacement(string s, int k) {
         int maxLen=0,i=0,st=0;
         vector<int> f(26,0);
+        int maxf=0,cntChars=0;
         while(i<s.size()){
             f[s[i]-'A']++;
-            while(st<i and !valid(f,k)){
+            maxf=max(maxf,f[s[i]-'A']);
+            cntChars++;
+            
+            while(st<i and !(cntChars-maxf<=k)){
                 f[s[st]-'A']--;
+                cntChars--;
+                
                 st++;
             }
-            if(valid(f,k)){
+            if(cntChars-maxf<=k){
                 maxLen=max(maxLen,i-st+1);
             }
             i++;
