@@ -13,7 +13,7 @@ public:
         }
         return maxf-minf;
     }
-    int beautySum(string s) {
+    int beautySum(string& s) {
         int ans=0;
         for(int i=0;i<s.size();i++){
             for(int j=i+1;j<s.size();j++){
