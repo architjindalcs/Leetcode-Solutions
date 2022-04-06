@@ -2,8 +2,6 @@ class Solution {
 public:
     long long minimalKSum(vector<int>& nums, int k) {
         sort(nums.begin(),nums.end());
-        for(int i: nums) cout<<i<<" ";
-        cout<<endl;
         int prev=0;
         long long ans=0;
         /*
