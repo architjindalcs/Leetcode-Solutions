@@ -20,27 +20,19 @@ public:
         vector<string> v1=helper(s1);
         vector<string> v2=helper(s2);
         if(v1.size()==v2.size()) return v1==v2;
-        
-        //now v1.size()>v2.size();
-        int i=0,j1=v1.size()-1;
-        int j2=v2.size()-1;
-        /*[My,name,is,Haley]
-              i
-          [My, Haley]
-               i
-               j
-        
-         */
-        while(i<=j2 and v1[i]==v2[i]) i++;
-        if(i==v2.size()) return true;
-        while(i<=j2 and v1[j1]==v2[j2]) {
-
-            j1--;
-            j2--;
+        int n2=v2.size(),i=0;
+        //n2-> small wala..
+        while(i<n2 and v1[i]==v2[i]){
+            i++;
         }
-        
-
-    
-         return (i-j2)==1;
+        // i
+        // i am doing leetcode haha
+        // i leetcode haha
+        int idx=v1.size()-(v2.size()-i);
+        while(idx<v1.size() and i<n2 and v1[idx]==v2[i]){
+            i++;
+            idx++;
+        }
+        return i==v2.size();
     }
 };
