@@ -17,9 +17,14 @@ public:
         if(freq=="minute") interval=60;
         else if(freq=="hour") interval=3600;
         else interval=86400;
-        int buckets=(endTime-startTime)/(interval);
-        
-        v=vector<int> (buckets+1,0);
+        int buckets=(endTime-startTime)/(interval)+1;
+        /*
+            st=10,end=130
+            
+            120/60 -> 2+1 = 3  
+            [10,69], [70,129] , [130]
+        */
+        v=vector<int> (buckets,0);
         
         for(int time: m[tweetName]){
             if(time>=startTime and time<=endTime){
