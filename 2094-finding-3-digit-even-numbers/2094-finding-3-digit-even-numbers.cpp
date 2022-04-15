@@ -1,21 +1,55 @@
 class Solution {
 public:
     vector<int> findEvenNumbers(vector<int>& digits) {
+        int cnt[10];
+        memset(cnt,0,sizeof(cnt));
+        for(int d: digits){
+            cnt[d]++;
+        }
+        
         vector<int> ans;
-        unordered_set<int> st;
-        for(int i=0;i<digits.size();i++){
-            for(int j=0;j<digits.size();j++){
-                for(int k=0;k<digits.size();k++){
-                    if(i==j or i==k or j==k) continue;
-                    if(digits[i]==0 or digits[k]&1) continue;
-                    int num=digits[i]*100+digits[j]*10+digits[k];
-                    //546
-                    st.insert(num);
+        
+        
+        for(int fdig=1;fdig<=9;fdig++){
+            for(int sdig=0;sdig<=9;sdig++){
+                for(int tdig=0;tdig<=8;tdig+=2){
+                    int num=fdig*100+sdig*10+tdig;
+           
+                    if(fdig==sdig and sdig==tdig){
+                        //all three are equal..
+                        if(cnt[fdig]>=3) {
+                            int f=1;
+                            while(f--) ans.push_back(num);
+                        }
+                    }
+                    else if(fdig==sdig){
+                        if(cnt[fdig]>=2 and cnt[tdig]){
+                            int f=1;
+                            while(f--) ans.push_back(num);
+                        }
+                    }
+                    else if(sdig==tdig){
+                        if(cnt[sdig]>=2 and cnt[fdig]){
+                            int f=1;
+                            while(f--) ans.push_back(num);
+                        }
+                    }
+                    else if(fdig==tdig and cnt[sdig]){
+                        if(cnt[fdig]>=2){
+                            int f=1;
+                            while(f--) ans.push_back(num);
+                        }
+                    }
+                    else{
+                        //all are unequal..
+                        int minm=min(1,min(cnt[fdig],min(cnt[sdig],cnt[tdig])));
+                        int num=fdig*100+sdig*10+tdig;
+                        while(minm--) ans.push_back(num);
+                    }
                 }
             }
         }
-        ans=vector<int> (st.begin(),st.end());
-        sort(ans.begin(),ans.end());
+        
         return ans;
     }
 };
