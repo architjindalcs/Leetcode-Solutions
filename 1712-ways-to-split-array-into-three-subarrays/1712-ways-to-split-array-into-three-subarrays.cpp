@@ -38,7 +38,7 @@ public:
         long ans=0;
         int mod=1000000007;
         for(int i=1;i<nums.size()-1;i++){
-            // if(pre[i-1]>(pre[n-1]-pre[i-1])/2) break;
+            if(pre[i-1]>(pre[n-1]-pre[i-1])/2) break;
             int left=helper(nums,pre,i,true);
             int right=helper(nums,pre,i,false);
             if(left==-1 or right==-1) continue;
