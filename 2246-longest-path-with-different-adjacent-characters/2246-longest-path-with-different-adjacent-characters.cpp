@@ -16,9 +16,13 @@ public:
                     smaxm=nans;
                 }
             }
-            else helper(adj,s,i);
+            else helper(adj,s,i);  //i am calling because still the further nodes may give
+            //better answer, so directly a call can be made on them...
         }
+        //1 is added for current node, 1+maxm+smaxm, path passing through this node..
         ans=max(ans,1+maxm+smaxm);
+        
+        //take this node and maxm of the two paths (if any)
         return 1+max(maxm,smaxm);
     }
     int longestPath(vector<int>& parent, string s) {
