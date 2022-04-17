@@ -16,7 +16,6 @@ public:
     void helper(TreeNode* root){
         if(!root) return;
         helper(root->left);
-        TreeNode* rightPtr=root->right;
         if(!prev){
             ans=root;
             prev=root;
@@ -26,7 +25,7 @@ public:
             root->left=NULL;
             prev=root;
         }
-        helper(rightPtr);
+        helper(root->right);
     }
     TreeNode* increasingBST(TreeNode* root) {
         helper(root);
