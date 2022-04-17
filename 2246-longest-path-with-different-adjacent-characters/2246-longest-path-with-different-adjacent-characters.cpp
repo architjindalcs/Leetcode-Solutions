@@ -16,7 +16,7 @@ public:
                     smaxm=nans;
                 }
             }
-            else ans=max(ans,helper(adj,s,i));
+            else helper(adj,s,i);
         }
         ans=max(ans,1+maxm+smaxm);
         return 1+max(maxm,smaxm);
