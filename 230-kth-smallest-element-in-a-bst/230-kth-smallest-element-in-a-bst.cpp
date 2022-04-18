@@ -11,21 +11,22 @@
  */
 class Solution {
 public:
-    int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> st;
-        TreeNode* curr=root;
-        int cnt=0;
-        while(curr or st.size()){
-            while(curr){
-                st.push(curr);
-                curr=curr->left;
-            }
-            curr=st.top();
-            st.pop();
-            cnt++;
-            if(cnt==k) return curr->val;
-            curr=curr->right;
+    void insert(TreeNode* root,stack<TreeNode*>& st){
+        while(root){
+            st.push(root);
+            root=root->left;
         }
-        return -1; 
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> st;   
+        insert(root,st);
+        while(st.size()){
+            TreeNode* tp=st.top();
+            st.pop();
+            k--;
+            if(k==0) return tp->val;
+            if(tp->right) insert(tp->right,st);
+        }
+        return -1;
     }
 };
