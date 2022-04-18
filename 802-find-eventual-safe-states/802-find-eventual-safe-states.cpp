@@ -8,7 +8,7 @@ public:
         */
         color[src]=1;  //marking it as unsafe for the time being..
         for(int i: adj[src]){
-            if(color[i]==1) return false;  //it is not safe state, because leading to unsafe node..
+            if(color[i]==1) return false;  //it is not safe state, because leading to cycle eventually ...
             if(color[i]==-1){
                 //not visited node..
                 if(!safe(adj,i,color)){
