@@ -19,14 +19,19 @@ public:
     }
     int kthSmallest(TreeNode* root, int k) {
         stack<TreeNode*> st;   
-        insert(root,st);
-        while(st.size()){
-            TreeNode* tp=st.top();
+        TreeNode* curr=root;
+        while(st.size() or curr){
+            while(curr){
+                st.push(curr);
+                curr=curr->left;
+            }
+            curr=st.top();
             st.pop();
             k--;
-            if(k==0) return tp->val;
-            if(tp->right) insert(tp->right,st);
+            if(k==0) return curr->val;
+            curr=curr->right;
         }
         return -1;
+    
     }
 };
