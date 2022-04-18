@@ -1,41 +1,31 @@
 class Solution {
 public:
     double largestSumOfAverages(vector<int>& nums, int k) {
-        int n=nums.size();
+        int n=nums.size();  //k adj subaarays   [1,|2,3,4|,5] -> k-1 lines..
         k--;
-        double dp[n][k+1];
-        memset(dp,0,sizeof(dp));
-        //size of nums=1 -> only a single number in array.
-        //k-1 lines can be drawn, it means..
-        dp[0][0]=nums[0]*1.0; //no line can be put
-        for(int i=1;i<=k;i++) dp[0][i]=nums[0]*1.0;
-        int cs=0;
+        double dp[k+1][n];
+        memset(dp,0.0,sizeof(dp));
+        //case of 0 lines..
+        double cs=0.0;
         for(int i=0;i<nums.size();i++){
             cs+=nums[i];
-            dp[i][0]=(cs/((i+1)*1.0));
+            dp[0][i]=(cs/(1.0*(i+1)));
         }
-       
- 
         
-        for(int i=1;i<n;i++){
-            for(int cuts=1;cuts<=min(k,i);cuts++){
-                /*
-                    [2,4,3],5
-                         i
-                */
-                double cs=0;
-                double maxm=dp[i][cuts-1]; //i am not making a cur
-                for(int j=i;j>=0;j--){
-                    cs+=nums[j];
-                    double val=(j ? dp[j-1][cuts-1]: 0)+ (cs/(1.0*(i-j+1)) );
-                    maxm=max(maxm,val);
+        for(int lines=1;lines<=k;lines++){
+            for(int i=lines;i<n;i++){
+                double cs=0.0,maxm=0.0;
+                for(int z=i;z>=0;z--){
+                    cs+=nums[z];
+                    /*
+                        3,4,5,6,7
+                                z
+                    */
+                    maxm=max(maxm,(z-1>=0? dp[lines-1][z-1]: 0)+(cs/(1.0*(i-z+1))));
                 }
-                //maxm=max(maxm,(cs/(1.0*(i+1))));
-               // cout<<"maxm: "<<maxm<<endl;
-                dp[i][cuts]=maxm;
+                dp[lines][i]=maxm;
             }
         }
-        
-        return dp[n-1][k];;
-    }
+        return dp[k][n-1];
+    }  
 };
