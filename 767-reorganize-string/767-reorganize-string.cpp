@@ -4,32 +4,44 @@ public:
         int f[26];
         memset(f,0,sizeof(f));
         for(char ch: s) f[ch-'a']++;
-        string ans="";
-        priority_queue<pair<int,char>> pq;
+        vector<pair<char,int>> v;
         for(int i=0;i<26;i++){
             if(!f[i]) continue;
             char ch=i+'a';
-
-            pq.push({f[i],ch});
+            int fr=f[i];
+            v.push_back({ch,fr});
         }
-        while(pq.size()>=2){
-            char ch1=pq.top().second;
-            int f1=pq.top().first;
-            pq.pop();
-            
-            char ch2=pq.top().second;
-            int f2=pq.top().first;
-            pq.pop();
-            ans+=ch1;
-            ans+=ch2;
-            if(f1-1) pq.push({f1-1,ch1});
-            if(f2-1) pq.push({f2-1,ch2});
+        sort(v.begin(),v.end(),[&](pair<char,int>& p1,pair<char,int>& p2){
+           return p1.second>p2.second; 
+        });
+        int maxf=v[0].second;
+        int n=s.size();
+        if(n%2==0){
+            //abab
+            if(maxf>n/2) return "";  //not possible
         }
-        if(pq.size()){
-            char ch=pq.top().second;
-            int f=pq.top().first;
-            if(f>1) return "";
-            ans+=ch;
+        else{
+            //aba
+            if(maxf > (n/2)+1) return "";
+        }
+       // int n=s.size();
+        int eidx=0,oidx=1;
+        string ans=string(n,'$');
+        for(pair<char,int>& p: v){
+            char ch=p.first;
+            int fr=p.second;
+            while(eidx<ans.size() and fr){
+                ans[eidx]=ch;
+                eidx+=2;
+                fr--;
+            }
+            if(fr){
+                while(oidx<ans.size() and fr){
+                    ans[oidx]=ch;
+                    oidx+=2;
+                    fr--;
+                }
+            }
         }
         return ans;
     }
